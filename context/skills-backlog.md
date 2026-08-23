@@ -7,6 +7,7 @@
 
 | Skill | Description | Source |
 |---|---|---|
+| ~~`research`~~ | ~~Deep, context-aware research via Perplexity~~ | ✅ Built — `.antigravity/skills/research/` |
 | `cold-outreach` | Templatize and streamline the cold outreach process; reduce CRM friction | Pain point: HubSpot complexity |
 | `crm-workflow` | Simplify HubSpot contact management for a solo consultant | Pain point: HubSpot complexity |
 | `session-summary` | Auto-generate session summaries using the template in `templates/` | Recurring workflow |
