@@ -1,0 +1,4 @@
+.env
+AGENTS.local.md
+.antigravity/settings.local.json
+node_modules/
