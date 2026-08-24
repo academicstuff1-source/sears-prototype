@@ -33,7 +33,7 @@ HubSpot is used for cold outreach but is not integrated into this workspace.
 
 ## Skills
 
-Skills live in `.antigravity/skills/skill-name/SKILL.md`.
+Skills live in `.agents/skills/skill-name/SKILL.md` and are registered via `.agents/skills.json`.
 Build a skill only when a recurring workflow becomes clear and repeatable.
 See the backlog: `context/skills-backlog.md`
 

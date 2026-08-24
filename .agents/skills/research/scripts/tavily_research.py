@@ -36,8 +36,8 @@ except ImportError:
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
-# Script lives at: .antigravity/skills/research/scripts/tavily_research.py
-# Workspace root is 4 levels up
+# Script lives at: .agents/skills/research/scripts/tavily_research.py
+# Workspace root is 4 levels up (.agents/skills/research/scripts → root)
 WORKSPACE_ROOT = Path(__file__).resolve().parents[4]
 load_dotenv(WORKSPACE_ROOT / ".env")
 
@@ -145,6 +145,11 @@ def format_output(query: str, data: dict, ctx: dict) -> str:
             score = round(r.get("score", 0), 2)
             lines.append(f"\n**[{r['title']}]({r['url']})** (relevance: {score})")
             lines.append(f"> {r.get('content', '').strip()[:300]}...")
+
+        lines.append("\n---\n")
+        lines.append("### Sources")
+        for i, r in enumerate(data["results"], 1):
+            lines.append(f"{i}. [{r['title']}]({r['url']})")
 
     lines.append("\n---")
     lines.append("\n### Actionable Takeaways")
