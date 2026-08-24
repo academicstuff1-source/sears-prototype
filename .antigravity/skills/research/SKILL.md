@@ -1,6 +1,6 @@
 ---
 name: research
-description: Deep, context-aware research using Perplexity. Reads Michael's current priorities, goals, and business context before searching — so findings are filtered and framed around what actually matters right now.
+description: Deep, context-aware research using Tavily. Reads Michael's current priorities, goals, and business context before searching — so findings are filtered and framed around what actually matters right now.
 ---
 
 # Research Skill
@@ -27,7 +27,7 @@ Before running any research, read:
 - `context/goals.md`
 - Any active project `README.md` files in `projects/`
 
-This context is automatically injected into the Perplexity system prompt by the script.
+This context is used to enrich the search query and frame the final output.
 
 ### Step 2 — Clarify the Request
 
@@ -40,21 +40,23 @@ If not already clear, ask:
 ### Step 3 — Run the Script
 
 ```bash
-python .antigravity/skills/research/scripts/perplexity_research.py --query "your research topic here"
+python .antigravity/skills/research/scripts/tavily_research.py --query "your research topic here"
 ```
 
 To also save the output to `references/research/`:
 
 ```bash
-python .antigravity/skills/research/scripts/perplexity_research.py --query "your research topic here" --save
+python .antigravity/skills/research/scripts/tavily_research.py --query "your research topic here" --save
 ```
 
-**Requirements:** `pip install python-dotenv requests`
-**API key:** Set `PERPLEXITY_API_KEY` in `.env` at the workspace root.
+**Requirements:** `pip install tavily-python python-dotenv`
+**API key:** Set `TAVILY_API_KEY` in `.env` at the workspace root.
+**Free tier:** 1,000 credits/month — advanced search uses 2 credits per call (~500 searches/month).
+**Get a key:** https://app.tavily.com
 
 ### Step 4 — Synthesize and Present
 
-After receiving raw output from Perplexity, structure and present findings as:
+After receiving output from Tavily, structure and present findings as:
 
 ---
 
@@ -85,13 +87,14 @@ Significant research gets saved to:
 
 | Setting | Value |
 |---|---|
-| Provider | Perplexity AI |
-| Model | `sonar-pro` |
-| Endpoint | `https://api.perplexity.ai/chat/completions` |
-| Key location | `.env` → `PERPLEXITY_API_KEY` |
+| Provider | Tavily AI |
+| Search depth | `advanced` (richer results) |
+| AI answer | Enabled (`include_answer=True`) |
+| Key location | `.env` → `TAVILY_API_KEY` |
+| Signup | https://app.tavily.com |
 
 ## Notes
 
 - `.env` is git-ignored — never commit keys
-- Context files are loaded fresh on every run — keep them current for best results
+- Keep context files current — they shape every research run
 - If a research topic repeats (e.g., "competitor research"), build a sub-skill with a hardcoded prompt template
