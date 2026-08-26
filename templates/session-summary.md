@@ -1,7 +1,8 @@
-# Session Summary
+﻿# Session Summary
 
 **Date:**
-**Focus:**
+**Primary focus:**
+**Related project(s):**
 
 ## What Got Done
 -
@@ -12,6 +13,10 @@
 ## Open Items / Next Steps
 -
 
-## Memory Updates
+## Context Updates
 - Preferences learned:
-- Decisions to log:
+- Priorities updated:
+- Project updates:
+
+## Decision Log Updates
+- Decision(s) to record:

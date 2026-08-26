@@ -1,7 +1,14 @@
-# Decision Log
+﻿# Decision Log
 
-Append-only. When a meaningful decision is made, log it here.
+This file is append-only.
 
-Format: [YYYY-MM-DD] DECISION: ... | REASONING: ... | CONTEXT: ...
+Log decisions that materially affect priorities, strategy, operations, tools, projects, clients, financial commitments, or team execution.
+
+Use this format:
+
+[YYYY-MM-DD] DECISION: ...
+REASONING: ...
+CONTEXT: ...
+OWNER: ...
 
 ***
