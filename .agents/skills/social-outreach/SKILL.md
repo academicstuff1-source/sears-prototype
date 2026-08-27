@@ -1,78 +1,64 @@
 ﻿---
 name: social-outreach
 description: >-
-  Use this skill when Michael finds a prospect on social media (LinkedIn, YouTube, Instagram, X) or wants to draft a personalized message/comment based on a post, video, or profile.
-  Extracts operational pain signals from content, formulates conversational conversation-starters (DMs, comments, or follow-up emails), and aligns with Michael's non-salesy AI automation positioning.
+  Drafts high-converting, personalized social media outreach messages (LinkedIn, IG, Email) 
+  by extracting operational pain signals from social content using the Insight-Observation-Question framework.
 ---
 
-# Social Media Outreach & Engagement Skill
+# Social Media Outreach Skill (Pro)
 
-Analyzes social media posts, videos, comments, or profile bios to identify genuine business and workflow pain signals, then drafts high-converting, human, non-spammy outreach messages.
+Transforms social media posts and profile bios into high-leverage conversation starters. It avoids generic AI fluff by utilizing the **Insight-Observation-Question (IOQ)** framework. 
 
 ## When to Activate
+- "Draft a message for [Name] based on this LinkedIn post: [Text]"
+- "Write an Instagram DM to this clinic owner."
+- "Create an email hook referencing this YouTube video."
 
-- "Draft a message for [Name] — here's their LinkedIn post: [content]"
-- "Here's an Instagram post / reel from a clinic owner: [description/text], write a DM"
-- "Analyze this YouTube video / channel and write an outreach message"
-- "Draft a LinkedIn connection request or comment for [Person]"
+## Execution Algorithm
 
-## Workflow
+### Step 1: Signal Extraction
+Analyze the provided content for implicit business signals:
+- **Hiring:** "We are looking for an admin!" → *Signal: High volume, manual work, burnout risk.*
+- **Growth:** "Opening our second location!" → *Signal: Scaling operations, existing systems might break.*
+- **Venting/Frustration:** "Tech is so frustrating." → *Signal: Ripe for automation consulting.*
 
-### Step 1 — Ingest & Analyze Social Content
-Review the provided post, video summary, or profile context. Look for implicit or explicit operational signals:
-- **Hiring & Bandwidth:** Complaints about being short-staffed, hiring admin roles, or team burnout.
-- **Growth & Bottlenecks:** Opening new locations, taking on more patients/clients, scaling pains.
-- **Tech & Tool Friction:** Frustrations with existing software, manual spreadsheets, or messy systems.
-- **Workflow Highlights:** Videos showing daily routine, office tours, or backend operations.
+### Step 2: The IOQ Framework
+Draft the message using this exact sequence:
+1. **Insight:** A brief, personalized acknowledgment of their content (proves you actually read it).
+2. **Observation:** Tying their content to an operational reality (the pivot to business).
+3. **Question:** A low-friction, open-ended question that begs a reply, not a meeting.
 
-### Step 2 — Determine Channel Strategy
-Select the appropriate format based on channel:
-- **LinkedIn DM / InMail:** 3–5 sentences max. Reference specific post insight → connect to practical workflow → low-friction open question.
-- **LinkedIn Public Comment:** Thoughtful observation that adds value publicly without pitching.
-- **Instagram DM:** Casual, short (2–3 sentences), conversational tone.
-- **Email Follow-up Referencing Social Post:** Professional bridge from their public post to a private conversation.
+### Step 3: Rules of Engagement
+- **NO AI WORDS:** Do not use "delve," "navigate," "testament," "thrilled," or "synergy."
+- **NO PITCHING:** The goal of the first message is a *reply*, not a meeting.
+- **LENGTH:** Keep it under 4 sentences. Make it easily readable on a mobile screen.
 
-### Step 3 — Apply Non-Negotiable Rules
-- **Never sound like a generic AI bot** (no "I came across your inspiring post and was blown away!").
-- **Reference a specific detail** that proves you actually watched/read their content.
-- **Do not hard-pitch AI services in the first message.** Pitch curiosity and pattern recognition around their problem.
-- **Always require Michael's review & explicit approval** before sending externally.
+### Step 4: Output Generation
+Generate options and save to: `references/research/social-outreach/YYYY-MM-DD-[platform]-[name].md`
 
-### Step 4 — Generate Draft Options & Save Record
-Save output to:
-`references/research/social-outreach/YYYY-MM-DD-[platform]-[name-slug].md`
-
-#### Output Format:
 ```markdown
-# Social Outreach: [Prospect Name] — [Platform]
+# 📱 Social Outreach: [Name]
 
-**Date:** YYYY-MM-DD  
-**Platform:** [LinkedIn / Instagram / YouTube / X]  
-**Prospect:** [Name, Title, Company, Profile URL]  
-**Source Content Analyzed:** [Summary/quote of post or video]  
-**Observed Signal / Pain Point:** [e.g., Struggling to manage front desk volume during expansion]  
+**Platform:** [Platform] | **Target:** [Name, Title]
+**The Signal:** [What their post actually means operationally]
 
 ---
 
-## Recommended Angles
+## Draft Options (For Review)
 
-### Option A: Direct DM (Conversational & Value-Focused)
-> *"Hey [First Name], saw your post about [specific topic/detail from post]. Really liked your point on [specific insight].*
->
-> *Curious — as you guys are [expanding/handling that volume], how are you managing the [repetitive workflow, e.g., intake paperwork / lead follow-up] without overwhelming your team?*
->
-> *I build simple automation workflows for [practices/businesses] in [DFW/Texas] to take that off the front desk's plate. Would love to swap notes sometime if you're open to it."*
+### Option 1: Direct IOQ (Best for LinkedIn DMs)
+> "Hey [Name], loved your post on [Specific Detail]. 
+> 
+> Usually when I see [Clinics/Firms] expanding like you are, the front desk systems start to fracture under the new volume. 
+> 
+> Out of curiosity, are you guys still handling your [intake/scheduling/follow-ups] manually, or have you started automating that yet?"
 
-### Option B: Public Comment (Builds Rapport First)
-> *"[Insightful, value-add comment directly addressing the post's core topic without a sales pitch — establishing Michael as a knowledgeable peer in operations]."*
+### Option 2: The Soft Value-Add (Public Comment)
+> "[Name], this is a great breakdown of [Topic]. The piece about [Detail] is spot on. Have you found that your team's bandwidth has been the main bottleneck there, or is it purely a systems issue?"
 
-### Option C: Short / Casual (Instagram or Quick LinkedIn DM)
-> *"Hey [First Name] — loved the reel showing your clinic's backend setup. Quick question: is your team still doing [specific manual step] manually, or have you already automated that piece?"*
+### Option 3: Ultra-Short (Best for Instagram/X)
+> "Hey [Name] - saw the post about the new location. Congrats! Quick question: as you scale, are you guys still doing patient intake manually or have you automated that flow?"
 
 ---
-
-## Next Steps
-- [ ] Review and adjust draft
-- [ ] Send via [Platform]
-- [ ] Log contact in HubSpot upon response
+**Status:** Awaiting Michael's approval.
 ```

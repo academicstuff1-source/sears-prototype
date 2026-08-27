@@ -1,37 +1,54 @@
-﻿# How to Work With Me
+﻿# ⚡ Antigravity Operating System — Quick Reference
 
-## Starting a Session
-- **"Brief me"** → Situational overview: priorities, project status, suggested focus for today.
+Welcome to your Second-Brain Workspace. I am configured to act as your executive assistant and strategic partner. 
+Use the commands below to trigger my built-in workflows.
 
-## Research
-- **"Research [company / URL / type of business]"** → Structured account brief saved to `references/research/`.
-- **"What do I know about [company]?"** → Pull existing research brief if one exists.
+---
 
-## Outreach Prep — Cold Call
-- **"Prep me for a call with [name] at [company]"** → 1-page call brief with talk track and discovery questions.
+## 📅 Session Management
+*The core loop that keeps this workspace current.*
 
-## Outreach Prep — Social Media
-- **"Draft a message for [person] — here's their post: [paste or describe]"** → Personalized DM or reply draft.
-- **"Research [LinkedIn/YouTube/Instagram URL] and draft an outreach message"** → Pull the content and draft a contextual note.
+- **"Brief me"** 
+  *What it does:* I analyze your current priorities, project statuses, and pending tasks, providing a 60-second executive summary to start your day.
+- **"Wrap up"** or **"Session summary"** 
+  *What it does:* I extract decisions and progress from our chat, update project READMEs, log material decisions, and save a timestamped summary.
 
-## Cold Email
-- **"Draft a cold email to [type of business] about [pain point]"** → Draft tailored for your review before sending.
+---
 
-## During or After a Call
-- **"Log this call: [quick notes]"** → Formats and saves notes; flags CRM update for your approval.
-- **"Post-call summary: [notes]"** → Structured summary + next actions + suggested CRM update.
+## 🔍 Intelligence & Research
+*Pre-outreach reconnaissance to eliminate blind spots.*
 
-## Decisions and Memory
-- **"Remember that [X]"** → Saved to the right context or rule file permanently.
-- **"Log this decision: [what/why]"** → Appends it to `decisions/log.md`.
+- **"Research [Company / URL / Niche]"** 
+  *What it does:* I perform a deep-dive investigation into the target's operational model, tech stack, and workflow bottlenecks, generating a strategic Account Brief.
+- **"What do I know about [Company]?"** 
+  *What it does:* I retrieve and summarize our existing intelligence on a target.
 
-## End of Session
-- **"Wrap up"** or **"Session summary"** → Fills the session summary template, updates project README files, and flags decisions.
+---
 
-## Projects
-- **"What's the status of [project]?"** → Reads the README and gives a current snapshot.
-- **"Update [project]: [new info]"** → Writes it directly to the project README.
+## 📞 Outreach Preparation
+*Tactical assets for high-conversion engagement.*
 
-## Prioritization
-- **"What should I work on?"** → Checks priorities + projects and gives a recommendation.
-- **"Is [task] worth doing right now?"** → Evaluates against your priority order and gives a direct verdict.
+- **"Prep me for a cold call with [Name] at [Company]"** 
+  *What it does:* I generate a 1-page tactical battlecard including a permission-based opener, hypothesis-driven discovery questions, and objection handlers.
+- **"Draft a message for [Name] — here is their post: [Paste/Describe]"** 
+  *What it does:* I analyze the psychological and operational signals in their social media post and draft a high-converting, non-spammy DM or comment.
+- **"Draft a cold email to [Type of Business] about [Pain Point]"** 
+  *What it does:* I draft a concise, problem-centric email optimized for a reply, not a pitch.
+
+---
+
+## 🧠 Memory & Decisions
+*How to teach me your preferences.*
+
+- **"Remember that [X]"** 
+  *What it does:* I permanently update your personal or operational context files.
+- **"Log this decision: [What/Why]"** 
+  *What it does:* I append a formal decision record to the append-only `decisions/log.md`.
+- **"Log this call: [Notes]"** 
+  *What it does:* I structure your raw notes, extract next actions, and prepare a CRM update.
+
+---
+
+## 🚀 Project Navigation
+- **"What's the status of [Project]?"** → Retrieves current state and bottlenecks.
+- **"Is [Task] worth doing right now?"** → Evaluates the task against your `#1 Priority`.
