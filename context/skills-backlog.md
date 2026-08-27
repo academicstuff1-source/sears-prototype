@@ -11,14 +11,6 @@ Repeatable workflows that may become Antigravity skills.
 
 ## Backlog
 
-### Now
-
-| Skill | Problem it Solves | Trigger | Desired Output | Inputs Required | Approval Needed? |
-|---|---|---|---|---|---|
-| `prospect-research` | Time-consuming manual research on businesses and decision-makers | Starting outreach on a new account | Structured account brief: company overview, likely workflow pain points, key contacts, outreach angle | Company name, URL, or industry | No — internal use only |
-| `session-summary` | Manual effort to capture session decisions, progress, and next steps | End of any working session | Filled session-summary.md filed in the right project or root | Conversation context | No |
-| `cold-call-prep` | Inconsistent, under-prepared cold call and discovery call briefs | Before any outreach call | Call prep brief: contact background, company context, pain hypothesis, talk track notes, key questions | Contact name, company, call type | No — internal use only |
-
 ### Next
 
 | Skill | Problem it Solves | Trigger | Desired Output | Inputs Required | Approval Needed? |
@@ -43,11 +35,15 @@ Repeatable workflows that may become Antigravity skills.
 
 | Skill | Location | Notes |
 |---|---|---|
-| `research` | `.agents/skills/research/` | Tavily-powered deep research, saves reports to `references/research/` |
+| `research` | `.agents/skills/research/` | Tavily-powered deep market and competitive research → `references/research/` |
+| `session-summary` | `.agents/skills/session-summary/` | Auto-captures session progress, updates project READMEs, logs decisions |
+| `prospect-research` | `.agents/skills/prospect-research/` | Generates 5-minute structured Account Briefs with tailored outreach angles |
+| `cold-call-prep` | `.agents/skills/cold-call-prep/` | Generates 1-page tactical call sheets with talk track, questions & objection handlers |
+| `social-outreach` | `.agents/skills/social-outreach/` | Analyzes LinkedIn/IG/YT posts and drafts high-converting conversational messages |
 
 ---
 
 ## How to Add a Skill
 1. Identify a workflow that repeats consistently
 2. Add it to the appropriate priority tier above
-3. When ready to build, say "let's build the [skill-name] skill" — then create `.agents/skills/skill-name/SKILL.md`
+3. When ready to build, explicitly approve it — then create `.agents/skills/skill-name/SKILL.md`
