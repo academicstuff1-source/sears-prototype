@@ -1,13 +1,12 @@
-﻿---
+---
 name: cold-call-prep
 description: >-
-  Generates a high-conversion, psychology-backed cold call battlecard. 
-  Includes permission-to-pitch openers, diagnostic pain questions, and empathy-led objection handlers.
+  Generates a high-conversion, psychology-backed cold call battlecard using Chris Voss's no-oriented questioning, Challenger Sale diagnostic structure, and Hormozi's value equation and offer clarity principles.
 ---
 
 # Cold Call & Discovery Prep Skill (Pro)
 
-Prepares Michael for high-stakes outbound calls by utilizing modern sales psychology (e.g., Chris Voss's "No-oriented" questions, Challenger Sale insights). 
+Prepares Michael for high-stakes outbound calls by utilizing modern sales psychology (e.g., Chris Voss's "No-oriented" questions, Challenger Sale insights, Hormozi's offer framing). 
 
 ## When to Activate
 - "Prep me for a cold call with [Name] at [Company]"
@@ -15,13 +14,19 @@ Prepares Michael for high-stakes outbound calls by utilizing modern sales psycho
 
 ## Execution Algorithm
 
+### Step 0: Offer Clarity Check (Hormozi Pass)
+Before building the battlecard, identify:
+- **Dream Outcome:** What does this prospect actually want?
+- **Cost of Inaction:** What is the current cost (time, money, frustration) of not solving this?
+- **Reduced Effort/Time:** How does our solution speed up the result and reduce their effort?
+
 ### Step 1: Context Ingestion
 Locate the target in `references/research/account-briefs/` or execute a rapid search. Identify the core operational pain hypothesis.
 
 ### Step 2: Psychological Framework Application
 1. **The Opener:** Must be pattern-interrupting and seek permission. (e.g., "I know I'm an interruption...")
-2. **The Hook:** A direct statement of the problem we solve, tied to a peer example.
-3. **The Questions:** Design "No-oriented" or deeply diagnostic questions that force the prospect to think about their workflow friction.
+2. **The Hook:** A direct statement of the problem we solve, tied to a peer example, quantifying the pain.
+3. **The Questions:** Design "No-oriented" or deeply diagnostic questions that force the prospect to think about their workflow friction and cost of inaction.
 4. **The Objections:** Prepare "Acknowledge & Pivot" responses. Never argue; validate and redirect.
 
 ### Step 3: Output Generation
@@ -43,17 +48,18 @@ Generate the brief and save to: `references/research/call-preps/YYYY-MM-DD-[comp
 ### Phase 1: Pattern Interrupt & Permission
 > *"Hey [Name], it's Michael. I know I'm catching you in the middle of your day — do you have 30 seconds for me to tell you why I'm calling, and then you can hang up if it's not relevant?"*
 
-### Phase 2: The Peer Hook
-> *"I work with other [Industry] owners in DFW. A massive problem they're facing right now is their front desk getting bogged down with manual intake forms, appointment reminders, and CRM data entry. They’re basically paying skilled staff to do copy-paste work."*
+### Phase 2: The Peer Hook (Specificity & Pain)
+> *"I work with other [Industry] owners in DFW. A massive problem they're facing right now is their front desk getting bogged down with manual intake forms, appointment reminders, and CRM data entry. It's usually costing them roughly [X hours/week] or causing them to lose follow-ups on every third lead."*
 
 ### Phase 3: The Pivot (No-Oriented Question)
 > *"Would it be a ridiculous idea to ask how your team is currently handling that volume?"*
 
 ## 3. High-Yield Discovery Questions
-*(If they open up, ask these to widen the pain)*
+*(If they open up, ask these to widen the pain and surface the cost of inaction)*
 1. *"When a lead comes in at 8 PM, what exactly happens between then and 8 AM the next day?"*
 2. *"How much of your staff's week is spent just chasing people for missing paperwork or confirmations?"*
-3. *"If you could instantly automate one administrative headache tomorrow, what would it be?"*
+3. *"If you did nothing about this for the next 12 months, what does that actually cost you in lost revenue or wasted payroll?"*
+4. *"What would it mean for your business if this bottleneck was completely solved in the next 30 days?"*
 
 ## 4. Objection Handling (Acknowledge & Pivot)
 
@@ -63,6 +69,14 @@ Generate the brief and save to: `references/research/call-preps/YYYY-MM-DD-[comp
 | **"We are too busy."** | *"I completely understand, and that’s exactly why I called. If you're slammed, it means manual admin is eating your margins. Would it be a terrible idea to put 15 minutes on the calendar next week when things cool down?"* |
 | **"Send me an email."** | *"Happy to. So I don't send you generic spam, what is your biggest operational bottleneck right now: patient intake, or lead follow-up?"* |
 
-## 5. The Close
-> *"I’d love to show you a 5-minute visual map of how a competitor solved this exact issue. If it makes sense, great. If not, you can steal the strategy. Do you have 15 minutes on [Day]?"*
+## 5. The Close (Zero-Risk Diagnostic)
+> *"I’d love to show you a 5-minute visual map of how a competitor solved this exact issue. The worst that happens is you get a free map of your workflow gaps to keep, and if it makes sense, we can talk about how to implement it. Do you have 15 minutes on [Day]?"*
 ```
+
+---
+
+## Frameworks Referenced
+- Chris Voss — Never Split the Difference (no-oriented questions, tactical empathy)
+- Challenger Sale — Insight-led selling, reframing the buyer's problem
+- Alex Hormozi — $100M Offers (value equation, offer clarity), $100M Leads (lead gen hierarchy, DM strategy)
+- See: `references/frameworks/hormozi.md`

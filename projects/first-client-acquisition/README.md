@@ -20,10 +20,10 @@ Michael
 - Clear understanding of which problems are easiest to sell and deliver
 
 ## Current Next Actions
-- [ ] Identify target accounts for first outreach wave (any niche; healthcare preferred)
-- [ ] Research and qualify 5–10 accounts using Prospeo or manual research
-- [ ] Prepare cold call or outreach brief for top prospects
-- [ ] Contact first 5 prospects and request a conversation
+- [x] Identify target accounts for first outreach wave (any niche; healthcare preferred)
+- [x] Research and qualify 5–10 accounts using Prospeo or manual research
+- [x] Prepare cold call or outreach brief for top prospects
+- [x] Contact first 5 prospects and request a conversation
 
 ## Notes
 - Preferred niche: healthcare — but do not over-filter early; follow the strongest signal
