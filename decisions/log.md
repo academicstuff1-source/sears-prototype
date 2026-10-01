@@ -179,3 +179,17 @@ OWNER: Michael
 REASONING: The 'AEP crunch' is a proven, highly validated pain point (heavy inbound call volume of repetitive questions + tedious Medical Intake/SOA collection) that creates massive urgency. 
 CONTEXT: This demographic perfectly matches the 'Overwhelmed Owner-Operator' thesis, but requires a very specific pitch. We merged the 'Shield from repetitive noise' concept with the 'Medical Intake Protocol' into a unified 'Triage Playbook' pitch.
 OWNER: Michael
+
+***
+
+[2026-10-01] DECISION: Reverted Sears parsing engine from Gemini LLM API back to a resilient local Regex parser for Phase 1 demo.
+REASONING: Google's Gemini AI API threw a 503 capacity error during testing. Relying on an external API that is experiencing load issues introduces unacceptable risk for a live client demo.
+CONTEXT: Built an AI parsing engine, pushed to Streamlit Cloud, observed the 503 failure, and rolled back to a hybrid Regex approach to guarantee demo stability.
+OWNER: Michael
+
+***
+
+[2026-10-01] DECISION: Designed Multi-Model Fallback Routing for Phase 2 architectures.
+REASONING: Using multiple keys for the same LLM (e.g., Gemini) does not protect against server-side capacity outages (503s). True failsafe architecture requires catching the provider error and routing to a completely different LLM provider (e.g., OpenAI or Anthropic).
+CONTEXT: Sparked by the Gemini 503 outage during Sears prep. This will be pitched as an 'Enterprise-grade reliability' feature for paid Phase 2 engagements.
+OWNER: Michael
