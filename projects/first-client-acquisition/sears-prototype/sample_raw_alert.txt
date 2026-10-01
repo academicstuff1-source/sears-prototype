@@ -1,0 +1,31 @@
+From: Web Alerts <alerts@scraper.local>
+To: Christopher Sears <chris@studyscoops.com>
+Subject: New CRO Trial Postings - Sept 17
+
+ALERT DIGEST: 3 New Postings Found
+
+---
+SITE: ICON Clinical (Dallas Hub)
+POSTING ID: #9942A
+CONDITION: Asthma (Adult)
+DETAILS: We are looking for adults aged 18 to 55 who have been diagnosed with asthma for a new inhaler study. Must have experienced symptoms in the last 6 months. 
+COMPENSATION: Participants may receive up to $750 for their time and travel.
+VISITS: 4 in-person visits over 6 weeks.
+CONTACT: Call 555-0199 or email research@icon-dallas.local. Mention study AST-2026.
+---
+SITE: Parexel Fort Worth
+POSTING ID: #PXL-881
+CONDITION: Migraines
+DETAILS: Chronic migraine sufferers needed. Must experience 4+ migraines per month. Ages 21-65.
+COMPENSATION: $400 stipend provided upon completion.
+VISITS: 3 visits, 30 days.
+CONTACT: 555-0288
+---
+SITE: Local Dermatology
+POSTING ID: #11
+CONDITION: Acne
+DETAILS: Seeking teens 13-17 for topical cream trial. 
+COMPENSATION: None listed
+VISITS: 2 visits.
+CONTACT: 555-9911
+---

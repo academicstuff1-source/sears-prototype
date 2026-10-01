@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Study Board — Phase One Plug</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary":          "#7C3AED",
+          "primary-light":    "#e9d5ff",
+          "primary-dark":     "#5b21b6",
+          "bg":               "#0f0a1a",
+          "surface":          "#1a1030",
+          "surface2":         "#21183a",
+          "border-col":       "#2e1f52",
+          "card":             "#160e28",
+          "muted":            "#8b7aa8",
+          "text-primary":     "#f5f0ff",
+        },
+        fontFamily: {
+          "display": ["Manrope", "Noto Sans", "sans-serif"]
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  * { font-family: "Manrope", "Noto Sans", sans-serif; -webkit-font-smoothing: antialiased; }
+
+  body { background: #0f0a1a; }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0f0a1a; }
+  ::-webkit-scrollbar-thumb { background: #2e1f52; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #7C3AED; }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* ── Row hover ── */
+  .study-row { transition: background 0.15s, border-color 0.15s; }
+  .study-row:hover { background: rgba(124,58,237,0.08); border-color: rgba(124,58,237,0.3); }
+  .study-row.active { background: rgba(124,58,237,0.14); border-color: rgba(124,58,237,0.55); }
+
+  /* ── Detail panel slide ── */
+  .detail-panel-mobile {
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .detail-panel-mobile.open { transform: translateY(0); }
+
+  /* ── Desktop detail panel ── */
+  .detail-panel-desktop {
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 400px;
+    flex-shrink: 0;
+  }
+  .detail-panel-desktop.open { transform: translateX(0); }
+
+  /* ── Table row striping ── */
+  .tbl-row:nth-child(even) { background: rgba(26,16,48,0.5); }
+
+  /* Filter chips */
+  .chip { transition: all 0.18s; cursor: pointer; }
+  .chip.active { background: #7C3AED; color: #fff; border-color: #7C3AED; }
+
+  /* Sidebar active item */
+  .nav-link.active { background: rgba(124,58,237,0.18); color: #9f67ff; border-left: 3px solid #7C3AED; }
+  .nav-link { border-left: 3px solid transparent; }
+</style>
+</head>
+
+<body class="min-h-screen text-text-primary">
+
+<!-- ══════════════════════════════════════════════════════════
+     MOBILE LAYOUT (< md)
+══════════════════════════════════════════════════════════ -->
+<div class="flex md:hidden flex-col h-[100dvh] bg-bg w-full relative">
+  <div class="relative flex w-full flex-col flex-1 overflow-hidden">
+
+    <div class="flex-1 overflow-y-auto no-scrollbar pb-24">
+
+      <!-- Mobile Header -->
+      <header class="flex items-center justify-between px-5 py-4 sticky top-0 bg-bg/95 backdrop-blur-sm z-40 border-b border-border-col">
+        <div class="flex items-center gap-2">
+          <div class="size-6 text-primary">
+            <svg class="w-full h-full" fill="none" viewBox="0 0 48 48"><g clip-path="url(#a)"><path d="M8.578 8.578C5.528 11.628 3.451 15.515 2.61 19.745c-.842 4.23-.41 8.616 1.24 12.601 1.651 3.986 4.447 7.392 8.033 9.788C15.47 44.53 19.687 45.81 24 45.81c4.314 0 8.53-1.28 12.117-3.676 3.586-2.396 6.382-5.802 8.032-9.788 1.65-3.985 2.082-8.371 1.24-12.601-.841-4.23-2.918-8.117-5.968-11.167L24 24 8.578 8.578Z" fill="currentColor"/></g></svg>
+          </div>
+          <h2 class="text-white text-lg font-bold tracking-tight">Phase One Plug</h2>
+        </div>
+        <button class="text-white/60 hover:text-primary transition-colors">
+          <span class="material-symbols-outlined text-[26px]">menu</span>
+        </button>
+      </header>
+
+      <div class="px-5 pt-5 pb-3">
+        <h1 class="text-white text-2xl font-extrabold tracking-tight">Current studies</h1>
+        <p class="text-muted text-sm mt-1">Live board of paid clinical trials. Tap a row for details.</p>
+      </div>
+
+      <!-- Mobile Filter Chips -->
+      <div class="flex gap-2 px-5 pb-4 overflow-x-auto no-scrollbar" id="mobileChips">
+        <button onclick="mobileFilter('all',this)" class="chip active shrink-0 text-xs font-700 px-4 py-2 rounded-full border border-border-col bg-primary text-white">All</button>
+        <button onclick="mobileFilter('inpatient',this)" class="chip shrink-0 text-xs font-600 px-4 py-2 rounded-full border border-border-col bg-surface text-muted">Inpatient</button>
+        <button onclick="mobileFilter('outpatient',this)" class="chip shrink-0 text-xs font-600 px-4 py-2 rounded-full border border-border-col bg-surface text-muted">Outpatient</button>
+        <button onclick="mobileFilter('dallas',this)" class="chip shrink-0 text-xs font-600 px-4 py-2 rounded-full border border-border-col bg-surface text-muted">Dallas, TX</button>
+        <button onclick="mobileFilter('high',this)" class="chip shrink-0 text-xs font-600 px-4 py-2 rounded-full border border-border-col bg-surface text-muted">High Payout</button>
+      </div>
+
+      <!-- Mobile Rows -->
+      <div class="px-4 flex flex-col gap-2" id="mobileList">
+        <!-- Generated by JS -->
+      </div>
+      <p class="text-center text-muted text-[11px] mt-5 mb-2">Last updated: Sept 17, 2026 · 12:00 PM CT</p>
+    </div>
+
+    <!-- Mobile Bottom Nav -->
+    <nav class="absolute bottom-0 left-0 right-0 bg-bg/95 backdrop-blur-sm border-t border-border-col flex justify-around items-center py-3 z-40">
+      <a href="#" class="flex flex-col items-center gap-0.5 text-muted hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[22px]">home</span>
+        <span class="text-[10px] font-600">Home</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-0.5 text-primary">
+        <span class="material-symbols-outlined text-[22px]">table_rows</span>
+        <span class="text-[10px] font-700">Study Board</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-0.5 text-muted hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[22px]">dashboard</span>
+        <span class="text-[10px] font-600">Dashboard</span>
+      </a>
+    </nav>
+
+    <!-- Mobile Detail Panel -->
+    <div class="detail-panel-mobile absolute inset-0 z-50 bg-bg overflow-y-auto no-scrollbar" id="mobileDetail">
+      <div class="sticky top-0 bg-bg/95 backdrop-blur-sm border-b border-border-col px-5 py-4 flex items-center gap-3">
+        <button onclick="closeMobileDetail()" class="text-muted hover:text-white transition-colors">
+          <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h2 class="text-white font-700 text-base truncate" id="mobileDetailTitle">Study Details</h2>
+      </div>
+      <div class="px-5 py-6 space-y-5" id="mobileDetailBody"></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     DESKTOP LAYOUT (≥ md)
+══════════════════════════════════════════════════════════ -->
+<div class="hidden md:flex h-screen overflow-hidden">
+
+  <!-- ── Sidebar ── -->
+  <aside class="w-60 shrink-0 flex flex-col border-r border-border-col bg-surface overflow-y-auto">
+    <!-- Logo -->
+    <div class="flex items-center gap-3 px-6 py-5 border-b border-border-col">
+      <div class="size-7 text-primary">
+        <svg class="w-full h-full" fill="none" viewBox="0 0 48 48"><g clip-path="url(#b)"><path d="M8.578 8.578C5.528 11.628 3.451 15.515 2.61 19.745c-.842 4.23-.41 8.616 1.24 12.601 1.651 3.986 4.447 7.392 8.033 9.788C15.47 44.53 19.687 45.81 24 45.81c4.314 0 8.53-1.28 12.117-3.676 3.586-2.396 6.382-5.802 8.032-9.788 1.65-3.985 2.082-8.371 1.24-12.601-.841-4.23-2.918-8.117-5.968-11.167L24 24 8.578 8.578Z" fill="currentColor"/></g></svg>
+      </div>
+      <span class="text-white font-800 text-lg tracking-tight">Phase One Plug</span>
+    </div>
+
+    <!-- Nav Links -->
+    <nav class="flex flex-col gap-1 px-3 py-4 flex-1">
+      <a href="#" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted hover:text-text-primary text-sm font-600 transition-all">
+        <span class="material-symbols-outlined text-[20px]">home</span>Home
+      </a>
+      <a href="#" class="nav-link active flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-700 transition-all">
+        <span class="material-symbols-outlined text-[20px]">table_rows</span>Study Board
+      </a>
+      <a href="#" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted hover:text-text-primary text-sm font-600 transition-all">
+        <span class="material-symbols-outlined text-[20px]">dashboard</span>Dashboard
+      </a>
+      <a href="#" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted hover:text-text-primary text-sm font-600 transition-all">
+        <span class="material-symbols-outlined text-[20px]">notifications</span>Alerts
+      </a>
+
+      <div class="border-t border-border-col my-3"></div>
+
+      <p class="text-xs font-700 text-muted uppercase tracking-wider px-3 mb-1">Filters</p>
+      <button onclick="desktopFilter('all',this)" class="nav-link active text-left flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-600 transition-all text-primary-light bg-primary/10">
+        <span class="material-symbols-outlined text-[18px]">apps</span>All Studies
+      </button>
+      <button onclick="desktopFilter('inpatient',this)" class="desktop-filter-btn nav-link text-left flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-text-primary text-sm font-600 transition-all">
+        <span class="material-symbols-outlined text-[18px]">bed</span>Inpatient
+      </button>
+      <button onclick="desktopFilter('outpatient',this)" class="desktop-filter-btn nav-link text-left flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-text-primary text-sm font-600 transition-all">
+        <span class="material-symbols-outlined text-[18px]">calendar_month</span>Outpatient
+      </button>
+      <button onclick="desktopFilter('high',this)" class="desktop-filter-btn nav-link text-left flex items-center gap-3 px-3 py-2 rounded-lg text-muted hover:text-text-primary text-sm font-600 transition-all">
+        <span class="material-symbols-outlined text-[18px]">payments</span>High Payout
+      </button>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="px-4 py-4 border-t border-border-col">
+      <p class="text-[11px] text-muted text-center leading-relaxed">Not affiliated with ClinicalTrials.gov or any CRO. Verify all details with the study site.</p>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ── -->
+  <main class="flex flex-col flex-1 overflow-hidden">
+
+    <!-- Desktop Top Bar -->
+    <header class="flex items-center justify-between px-8 py-4 border-b border-border-col bg-bg/80 backdrop-blur-sm shrink-0">
+      <div>
+        <h1 class="text-white text-xl font-800 tracking-tight">Current studies</h1>
+        <p class="text-muted text-xs mt-0.5">Live board of paid clinical trials. Click a row for details.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[11px] text-muted">Last updated: Sept 17, 2026 · 12:00 PM CT</span>
+        <div class="flex items-center gap-1.5 text-xs font-600 text-emerald-400 bg-emerald-400/10 px-3 py-1.5 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
+          Live
+        </div>
+      </div>
+    </header>
+
+    <!-- Table Area + Detail Panel -->
+    <div class="flex flex-1 overflow-hidden">
+
+      <!-- Study Table -->
+      <div class="flex-1 overflow-y-auto px-6 py-5">
+
+        <!-- Column Headers -->
+        <div class="grid grid-cols-[2fr_1fr_1fr_1fr_120px] gap-4 px-4 pb-2 text-xs font-700 text-muted uppercase tracking-wider border-b border-border-col mb-1">
+          <span>Study</span>
+          <span>Location</span>
+          <span>Commitment</span>
+          <span>Eligibility</span>
+          <span class="text-right">Payout</span>
+        </div>
+
+        <!-- Table Rows -->
+        <div class="flex flex-col gap-1" id="desktopList">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+
+      <!-- Desktop Detail Panel -->
+      <div class="detail-panel-desktop overflow-y-auto border-l border-border-col bg-surface" id="desktopDetail">
+        <!-- Empty state -->
+        <div class="flex flex-col items-center justify-center h-full text-center px-8" id="desktopEmptyState">
+          <span class="material-symbols-outlined text-[48px] text-border-col mb-4">pageview</span>
+          <p class="text-muted text-sm font-600">Select a study from the board<br>to view full details here.</p>
+        </div>
+        <div class="hidden px-6 py-6 space-y-5" id="desktopDetailBody"></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+
+<script>
+/* ══════════════════════════════════
+   DATA
+══════════════════════════════════ */
+const studies = [
+  {
+    title: "Healthy Adult Cardiovascular Study",
+    status: "Recruiting", statusClass: "text-emerald-400 bg-emerald-400/10",
+    payout: "$7,500", payoutRaw: 7500,
+    location: "Dallas, TX", site: "ICON Clinical",
+    commitment: "14-day inpatient", commitmentType: "inpatient",
+    age: "18–55", sex: "All",
+    condition: "Healthy volunteers",
+    description: "This Phase 1 study evaluates the effects of a new cardiovascular compound in healthy adult volunteers. Participants will be admitted for a 14-day inpatient stay with meals, accommodation, and activities provided at no cost.",
+    contact: "Call 555-0199 or email research@icon-dallas.local — mention study CV-2026.",
+    tags: "inpatient dallas high"
+  },
+  {
+    title: "Chronic Migraine Management Trial",
+    status: "New Today", statusClass: "text-violet-400 bg-violet-400/10",
+    payout: "$400", payoutRaw: 400,
+    location: "Fort Worth, TX", site: "Parexel",
+    commitment: "3 visits / 30 days", commitmentType: "outpatient",
+    age: "21–65", sex: "All",
+    condition: "Migraine (4+ per month)",
+    description: "Seeking adults who experience 4 or more migraines per month to participate in a new treatment evaluation study. Involves 3 outpatient visits at the Fort Worth facility over 30 days.",
+    contact: "Call 555-0288 to speak with the study coordinator.",
+    tags: "outpatient dallas"
+  },
+  {
+    title: "Type 2 Diabetes Device Trial — Phase 1",
+    status: "Closing Soon", statusClass: "text-amber-400 bg-amber-400/10",
+    payout: "$12,500", payoutRaw: 12500,
+    location: "Plano, TX", site: "Fortrea",
+    commitment: "21-day inpatient + 2 visits", commitmentType: "inpatient",
+    age: "18–70", sex: "All",
+    condition: "Type 2 diabetes required",
+    description: "Evaluating a new wearable glucose monitoring device in adults with Type 2 diabetes. Requires a 21-day inpatient stay at the Plano research center, followed by two outpatient follow-up visits.",
+    contact: "Call 555-0377 to speak with the enrollment team.",
+    tags: "inpatient dallas high"
+  },
+  {
+    title: "Adult Asthma Inhaler Research Study",
+    status: "Recruiting", statusClass: "text-emerald-400 bg-emerald-400/10",
+    payout: "$750", payoutRaw: 750,
+    location: "Dallas, TX", site: "ICON Clinical",
+    commitment: "4 visits / 6 weeks", commitmentType: "outpatient",
+    age: "18–55", sex: "All",
+    condition: "Asthma, symptoms in last 6 months",
+    description: "Adults with an asthma diagnosis are invited to participate in a study evaluating a new inhaler formulation. Requires 4 in-clinic visits over 6 weeks at our Dallas location.",
+    contact: "Call 555-0199 or email research@icon-dallas.local — mention study AST-2026.",
+    tags: "outpatient dallas"
+  },
+  {
+    title: "Healthy Volunteer Sleep & Metabolism Study",
+    status: "Recruiting", statusClass: "text-emerald-400 bg-emerald-400/10",
+    payout: "$5,000", payoutRaw: 5000,
+    location: "San Antonio, TX", site: "Worldwide Clinical",
+    commitment: "7-day inpatient", commitmentType: "inpatient",
+    age: "21–45", sex: "All",
+    condition: "Healthy volunteers",
+    description: "Investigating the relationship between sleep patterns and metabolic function in healthy adults. A 7-day residential stay at the San Antonio facility. All meals, accommodation, and activities provided.",
+    contact: "Call 555-0466 to pre-screen over the phone.",
+    tags: "inpatient high"
+  },
+  {
+    title: "Hypertension Medication Pilot",
+    status: "Recruiting", statusClass: "text-emerald-400 bg-emerald-400/10",
+    payout: "$1,800", payoutRaw: 1800,
+    location: "Dallas, TX", site: "PPD Clinical",
+    commitment: "6 visits / 8 weeks", commitmentType: "outpatient",
+    age: "35–65", sex: "All",
+    condition: "Hypertension diagnosis required",
+    description: "Adults with a confirmed hypertension diagnosis needed for a new oral medication evaluation. Involves 6 outpatient visits over 8 weeks. Blood pressure monitoring equipment provided for home use between visits.",
+    contact: "Call 555-0155 and ask for the hypertension study team.",
+    tags: "outpatient dallas"
+  }
+];
+
+/* ══════════════════════════════════
+   MOBILE
+══════════════════════════════════ */
+function renderMobileRows(filtered) {
+  const list = document.getElementById('mobileList');
+  list.innerHTML = filtered.map((s, i) => `
+    <div class="study-row cursor-pointer bg-card border border-border-col rounded-2xl px-4 py-4" onclick="openMobileDetail(${studies.indexOf(s)})">
+      <div class="flex items-center justify-between mb-2">
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-700 ${s.statusClass} px-2.5 py-1 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-current inline-block"></span>${s.status}
+        </span>
+        <span class="text-primary-light font-800 text-lg">${s.payout}</span>
+      </div>
+      <h3 class="text-white font-700 text-[14px] leading-snug mb-2">${s.title}</h3>
+      <div class="flex flex-wrap gap-x-4 gap-y-1 text-muted text-xs">
+        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">location_on</span>${s.location}</span>
+        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">${s.commitmentType === 'inpatient' ? 'bed' : 'calendar_month'}</span>${s.commitment}</span>
+        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">person</span>Ages ${s.age}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openMobileDetail(i) {
+  const s = studies[i];
+  document.getElementById('mobileDetailTitle').textContent = s.title;
+  document.getElementById('mobileDetailBody').innerHTML = detailHTML(s);
+  document.getElementById('mobileDetail').classList.add('open');
+}
+function closeMobileDetail() {
+  document.getElementById('mobileDetail').classList.remove('open');
+}
+function mobileFilter(tag, el) {
+  document.querySelectorAll('#mobileChips .chip').forEach(c => {
+    c.classList.remove('active','bg-primary','text-white','border-primary');
+    c.classList.add('bg-surface','text-muted','border-border-col');
+  });
+  el.classList.add('active','bg-primary','text-white','border-primary');
+  el.classList.remove('bg-surface','text-muted','border-border-col');
+  const filtered = tag === 'all' ? studies : studies.filter(s => s.tags.includes(tag));
+  renderMobileRows(filtered);
+}
+
+/* ══════════════════════════════════
+   DESKTOP
+══════════════════════════════════ */
+let activeDesktopIndex = null;
+
+function renderDesktopRows(filtered) {
+  const list = document.getElementById('desktopList');
+  list.innerHTML = filtered.map((s) => {
+    const i = studies.indexOf(s);
+    return `
+    <div class="study-row tbl-row cursor-pointer grid grid-cols-[2fr_1fr_1fr_1fr_120px] gap-4 items-center px-4 py-4 rounded-xl border border-transparent ${activeDesktopIndex === i ? 'active' : ''}"
+      onclick="openDesktopDetail(${i})">
+      <!-- Study name + status -->
+      <div class="flex flex-col gap-1.5 min-w-0">
+        <span class="text-white font-700 text-sm truncate">${s.title}</span>
+        <span class="inline-flex items-center gap-1.5 w-fit text-[11px] font-700 ${s.statusClass} px-2 py-0.5 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-current inline-block"></span>${s.status}
+        </span>
+      </div>
+      <!-- Location -->
+      <div class="flex flex-col text-sm">
+        <span class="text-text-primary font-500">${s.location}</span>
+        <span class="text-muted text-xs">${s.site}</span>
+      </div>
+      <!-- Commitment -->
+      <div class="flex items-center gap-1.5 text-sm text-text-primary font-500">
+        <span class="material-symbols-outlined text-[16px] text-muted">${s.commitmentType === 'inpatient' ? 'bed' : 'calendar_month'}</span>
+        ${s.commitment}
+      </div>
+      <!-- Eligibility -->
+      <div class="flex flex-col text-sm">
+        <span class="text-text-primary font-500">Ages ${s.age}</span>
+        <span class="text-muted text-xs truncate">${s.condition}</span>
+      </div>
+      <!-- Payout -->
+      <div class="text-right">
+        <span class="text-primary-light font-800 text-base">${s.payout}</span>
+      </div>
+    </div>
+  `}).join('');
+}
+
+function openDesktopDetail(i) {
+  activeDesktopIndex = i;
+  const s = studies[i];
+  const panel = document.getElementById('desktopDetail');
+  const body = document.getElementById('desktopDetailBody');
+  const empty = document.getElementById('desktopEmptyState');
+
+  empty.classList.add('hidden');
+  body.classList.remove('hidden');
+  body.innerHTML = `
+    <div class="flex items-start justify-between gap-3 pb-4 border-b border-border-col">
+      <h2 class="text-white font-800 text-base leading-snug">${s.title}</h2>
+      <button onclick="closeDesktopDetail()" class="shrink-0 text-muted hover:text-white transition-colors mt-0.5">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    <div class="flex items-center justify-between">
+      <span class="inline-flex items-center gap-1.5 text-xs font-700 ${s.statusClass} px-3 py-1.5 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-current inline-block"></span>${s.status}
+      </span>
+      <span class="text-primary-light font-800 text-2xl">${s.payout}</span>
+    </div>
+    <div class="bg-card border border-border-col rounded-2xl p-4 space-y-3">
+      ${metaRow('location_on', s.location + ' · ' + s.site)}
+      ${metaRow(s.commitmentType === 'inpatient' ? 'bed' : 'calendar_month', s.commitment)}
+      ${metaRow('person', 'Ages ' + s.age + ' · ' + s.sex)}
+      ${metaRow('biotech', s.condition)}
+    </div>
+    <div>
+      <h3 class="text-white font-700 text-sm mb-2">About This Study</h3>
+      <p class="text-muted text-sm leading-relaxed">${s.description}</p>
+    </div>
+    <div class="bg-card border border-border-col rounded-2xl p-4">
+      <h3 class="text-white font-700 text-sm mb-1.5">How to Apply</h3>
+      <p class="text-muted text-sm">${s.contact}</p>
+    </div>
+    <button onclick="requestContact(this)" class="w-full bg-primary hover:bg-primary-dark text-white font-700 text-sm py-3.5 rounded-xl transition-colors">
+      Request Contact
+    </button>
+    <p class="text-[11px] text-muted text-center leading-relaxed">Participation is voluntary. Eligibility and compensation determined by the research team. This is not medical advice.</p>
+  `;
+
+  panel.classList.add('open');
+  renderDesktopRows(currentDesktopFilter());
+}
+
+function closeDesktopDetail() {
+  activeDesktopIndex = null;
+  document.getElementById('desktopDetail').classList.remove('open');
+  document.getElementById('desktopEmptyState').classList.remove('hidden');
+  document.getElementById('desktopDetailBody').classList.add('hidden');
+  renderDesktopRows(currentDesktopFilter());
+}
+
+let _desktopTag = 'all';
+function currentDesktopFilter() {
+  return _desktopTag === 'all' ? studies : studies.filter(s => s.tags.includes(_desktopTag));
+}
+function desktopFilter(tag, el) {
+  _desktopTag = tag;
+  document.querySelectorAll('.desktop-filter-btn, [onclick^="desktopFilter"]').forEach(b => {
+    b.classList.remove('active','text-primary-light','bg-primary/10');
+    b.classList.add('text-muted');
+  });
+  el.classList.add('active','text-primary-light','bg-primary/10');
+  el.classList.remove('text-muted');
+  renderDesktopRows(currentDesktopFilter());
+}
+
+function metaRow(icon, text) {
+  return `<div class="flex items-center gap-2 text-sm">
+    <span class="material-symbols-outlined text-primary text-[17px]">${icon}</span>
+    <span class="text-text-primary font-500">${text}</span>
+  </div>`;
+}
+
+/* Shared detail HTML for mobile */
+function detailHTML(s) {
+  return `
+    <div class="flex items-center justify-between">
+      <span class="inline-flex items-center gap-1.5 text-xs font-700 ${s.statusClass} px-3 py-1.5 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-current inline-block"></span>${s.status}
+      </span>
+      <span class="text-primary-light font-800 text-2xl">${s.payout}</span>
+    </div>
+    <div class="bg-surface border border-border-col rounded-2xl p-4 space-y-3">
+      ${metaRow('location_on', s.location + ' · ' + s.site)}
+      ${metaRow(s.commitmentType === 'inpatient' ? 'bed' : 'calendar_month', s.commitment)}
+      ${metaRow('person', 'Ages ' + s.age + ' · ' + s.sex)}
+      ${metaRow('biotech', s.condition)}
+    </div>
+    <div>
+      <h3 class="text-white font-700 text-sm mb-2">About This Study</h3>
+      <p class="text-muted text-sm leading-relaxed">${s.description}</p>
+    </div>
+    <div class="bg-surface border border-border-col rounded-2xl p-4">
+      <h3 class="text-white font-700 text-sm mb-1">How to Apply</h3>
+      <p class="text-muted text-sm">${s.contact}</p>
+    </div>
+    <button onclick="requestContact(this)" class="w-full bg-primary hover:bg-primary-dark text-white font-700 text-[15px] py-4 rounded-2xl transition-colors">
+      Request Contact
+    </button>
+    <p class="text-[11px] text-muted text-center leading-relaxed">Participation is voluntary. Eligibility and compensation determined by the research team.</p>
+  `;
+}
+
+function requestContact(btn) {
+  btn.textContent = 'Request Sent!';
+  btn.style.background = '#10b981';
+  setTimeout(() => {
+    btn.textContent = 'Request Contact';
+    btn.style.background = '';
+  }, 2500);
+}
+
+/* ══════════════════════════════════
+   INIT
+══════════════════════════════════ */
+renderMobileRows(studies);
+renderDesktopRows(studies);
+</script>
+
+</body>
+</html>

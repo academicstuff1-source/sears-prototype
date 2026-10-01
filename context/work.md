@@ -1,4 +1,4 @@
-﻿# Work and Business Context
+# Work and Business Context
 
 ## Business Overview
 Independent AI automation consulting practice. Business name TBD.
@@ -34,8 +34,7 @@ Early validation. Near-term milestone: close one paid pilot, audit, implementati
 |---|---|
 | Google Workspace | Email, documents, spreadsheets, calendar, storage, collaboration |
 | Google AI Pro | AI tools and cloud storage |
-| Google Antigravity | AI-assisted planning, prototyping, project organization, and building |
-| HubSpot Free | CRM, prospect tracking, pipeline, contact records, follow-up management |
+| Google Antigravity | AI-assisted planning, prototyping, project organization, and building (also acts as the text-based CRM) |
 | Gmail | Prospect, partner, and client communication |
 | Prospeo | Prospecting and contact-data research |
 | Clay | Selective research and workflow exploration — no paid credits without explicit approval |

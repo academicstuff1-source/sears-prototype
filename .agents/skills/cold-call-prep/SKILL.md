@@ -43,8 +43,18 @@ Generate the brief and save to: `references/research/call-preps/YYYY-MM-DD-[comp
 - **Who:** [Name, Title]
 - **The Angle:** [Core hypothesis, e.g., "They just opened a 2nd clinic; front desk is likely drowning in intake forms."]
 
-## 2. The Script
+## 2. The Human Override (Situational Awareness)
+*(CRITICAL: Before you pitch, listen to their environment. Are they driving, actively lost, yelling at kids, or dealing with an emergency? If yes, DO NOT PITCH).*
+> *"Oh wow, it sounds like you are in the middle of chaos right now. I am going to hang up and let you get sorted. I'll try you back tomorrow. Good luck!"*
 
+## 3. Gatekeeper Strategy (Turning them into an Influencer)
+*(CRITICAL RULE: Always verify identity first. Ask "Is this [Owner Name]?" Owner-operators often answer the phones themselves. Never run this play until you confirm they are NOT the owner).*
+
+**The Ask:** *"Hey there, this is Michael. Is [Owner Name] around, or are they tied up on a call right now?"*
+**The Pivot:** *"No worries. I work with independent [industry] owners to build operational playbooks. I imagine as the one managing the front, it’s about to get incredibly chaotic for you fielding repetitive questions and chasing down [specific admin task]?"*
+**The Ask for Access:** *"That's exactly why I wanted to connect with them before it gets crazy. What is the best way for me to catch [Owner Name] so I can show them how to take that completely off your plate?"*
+
+## 4. The Script
 ### Phase 1: Pattern Interrupt & Permission
 > *"Hey [Name], it's Michael. I know I'm catching you in the middle of your day — do you have 30 seconds for me to tell you why I'm calling, and then you can hang up if it's not relevant?"*
 
@@ -54,14 +64,14 @@ Generate the brief and save to: `references/research/call-preps/YYYY-MM-DD-[comp
 ### Phase 3: The Pivot (No-Oriented Question)
 > *"Would it be a ridiculous idea to ask how your team is currently handling that volume?"*
 
-## 3. High-Yield Discovery Questions
+## 5. High-Yield Discovery Questions
 *(If they open up, ask these to widen the pain and surface the cost of inaction)*
 1. *"When a lead comes in at 8 PM, what exactly happens between then and 8 AM the next day?"*
 2. *"How much of your staff's week is spent just chasing people for missing paperwork or confirmations?"*
 3. *"If you did nothing about this for the next 12 months, what does that actually cost you in lost revenue or wasted payroll?"*
 4. *"What would it mean for your business if this bottleneck was completely solved in the next 30 days?"*
 
-## 4. Objection Handling (Acknowledge & Pivot)
+## 6. Objection Handling (Acknowledge & Pivot)
 
 | Objection | The Play |
 |---|---|
@@ -69,7 +79,7 @@ Generate the brief and save to: `references/research/call-preps/YYYY-MM-DD-[comp
 | **"We are too busy."** | *"I completely understand, and that’s exactly why I called. If you're slammed, it means manual admin is eating your margins. Would it be a terrible idea to put 15 minutes on the calendar next week when things cool down?"* |
 | **"Send me an email."** | *"Happy to. So I don't send you generic spam, what is your biggest operational bottleneck right now: patient intake, or lead follow-up?"* |
 
-## 5. The Close (Zero-Risk Diagnostic)
+## 7. The Close (Zero-Risk Diagnostic)
 > *"I’d love to show you a 5-minute visual map of how a competitor solved this exact issue. The worst that happens is you get a free map of your workflow gaps to keep, and if it makes sense, we can talk about how to implement it. Do you have 15 minutes on [Day]?"*
 ```
 

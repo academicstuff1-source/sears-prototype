@@ -1,7 +1,7 @@
-﻿# Personal Profile
+# Personal Profile
 
 ## Identity
-- **Name:** Michael
+- **Name:** Michael Anyanwu
 - **Role:** Founder and AI Automation Consultant
 - **Location:** Dallas-Fort Worth, TX
 - **Timezone:** Central Time — America/Chicago
@@ -28,3 +28,4 @@ Get 5 conversations with 5 real business owners (any niche, preferred: healthcar
 - For decisions: separate recommendation / why it matters / assumptions & unknowns / risks or tradeoffs / clear next actions.
 - Favor practical implementation over generic theory.
 - Challenge assumptions respectfully when a better path exists.
+- Do not use Michael's last name in scripts, emails, or outreach templates (use "Michael" only).

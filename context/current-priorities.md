@@ -1,9 +1,22 @@
-﻿# Current Priorities
+# Current Priorities
 
-> Last updated: 2026-08-26
+> Last updated: 2026-09-23
 
 ## Number-One Priority
-Get 5 conversations with 5 real business owners — any niche, preferred: healthcare. Optimizing for reps and pattern recognition.
+Get 5 conversations with 5 real business owners. Optimizing for reps and pattern recognition.
+*Targeting Shift:* Prioritize warm community connections (church, former colleagues) and owner-operated SMBs. Deprioritize cold outreach to traditional healthcare clinics/practitioners (med spas, dentists, GPs) with heavy admin gatekeeping.
+
+**Preferred Cold Call Profile — "The Overwhelmed Owner-Operator":**
+1. **Owner-operated Home Services / Trades** — Roofing, HVAC, landscaping. High speed-to-lead urgency, owner in the field, low gatekeeper friction.
+2. **Independent Medicare/Health Insurance Brokers** — *High Priority through October.* Massive urgency due to the Oct 15th AEP (Annual Enrollment Period) crunch. Highly receptive to "call triage playbooks" for repetitive inquiries.
+3. **Low-friction Health, Wellness & Clinical Sub-niches** — Owner-operated businesses in healthcare where the practitioner is also the operator, and where heavy EHR/corporate IT lockdowns are unlikely:
+   - Mobile & concierge wellness (IV hydration, mobile phlebotomy, concierge physicals)
+   - Independent allied health — solo/small cash-pay PT, sports chiro, or occupational therapy
+   - Doula care, midwifery, and birth services (validated by Melanie Powell outreach)
+   - Non-medical home health & senior care agencies (caregiver logistics)
+   - B2B clinical services — clinical trial recruiters, medical couriers, independent medical billing (validated by Christopher Sears engagement)
+   - *Note: Michael's pre-med background is a credibility asset in these conversations. Use it.*
+4. **Local B2B Services** — Commercial cleaning, specialized logistics, security firms.
 
 ## Active Focus Areas
 1. **Find qualified prospects** — businesses with urgent, expensive, repetitive, or frustrating workflow problems that are realistically solvable
@@ -28,6 +41,7 @@ No fixed external deadlines. Working urgency: establish a consistent outreach rh
 7. Low-leverage optimization, polishing, speculative tool research, and nonessential projects
 
 ## What Not to Prioritize Right Now
+- Cold calling **traditional** healthcare practitioner offices (corporate-owned dentists, large medical groups, hospital-affiliated clinics) without a warm introduction — high gatekeeper friction confirmed.
 - Premature scaling, automation infrastructure, or complex tooling before the first client
 - Brand building, social media, or content marketing before client conversations are producing signal
 - Locking into a single niche before enough discovery conversations have revealed patterns

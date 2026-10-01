@@ -1,4 +1,4 @@
-﻿# Offer Development
+# Offer Development
 
 ## Purpose
 Define the simplest, most credible service offer that Michael can confidently sell, explain, and deliver right now.
@@ -20,7 +20,7 @@ Michael
 - Specific enough that a prospect understands what they are buying
 
 ## Current Next Actions
-- [ ] Draft a one-page offer summary: problem, customer type, outcome, scope, pricing hypothesis
+- [x] Draft a one-page offer summary: problem, customer type, outcome, scope, pricing hypothesis
 - [ ] Test the offer explanation verbally or in writing with a realistic prospect scenario
 - [ ] Identify 2–3 specific workflow types this offer most credibly solves
 
