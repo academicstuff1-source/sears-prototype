@@ -7,7 +7,7 @@ import json
 def parse_web_alert_text(raw_text):
     """Parses the raw unstructured text from the Web Alert app into structured data."""
     lines = [line.strip() for line in raw_text.split('\n')]
-    clean_lines = [line for line in lines if line and not '[…]' in line]
+    clean_lines = [line for line in lines if line and not '[?]' in line]
     
     studies = []
     
@@ -15,27 +15,53 @@ def parse_web_alert_text(raw_text):
     while i < len(clean_lines):
         line = clean_lines[i]
         
+        # Format 1: Triggered by "Starts in X Days"
         if i + 1 < len(clean_lines) and re.match(r'Starts in \d+ Days', clean_lines[i+1], re.IGNORECASE):
             current_study = {
                 "project_name": line,
                 "timeline": clean_lines[i+1]
             }
-            
             try:
                 current_study["posting_id"] = clean_lines[i+2]
                 current_study["location"] = clean_lines[i+3]
                 current_study["start_date"] = clean_lines[i+4]
                 current_study["end_date"] = clean_lines[i+5]
                 current_study["demographics"] = clean_lines[i+6]
-                
                 comp_raw = clean_lines[i+7]
                 current_study["compensation"] = comp_raw.replace('*', '')
                 current_study["age_range"] = clean_lines[i+8]
-                
                 studies.append(current_study)
                 i += 9
                 continue
+            except IndexError:
+                break
                 
+        # Format 2: Triggered by "Enrolling" immediately after an ID
+        elif i + 1 < len(clean_lines) and clean_lines[i+1].lower() == 'enrolling':
+            current_study = {
+                "posting_id": line,
+                "timeline": clean_lines[i+1]
+            }
+            try:
+                current_study["demographics"] = clean_lines[i+2]
+                current_study["project_name"] = clean_lines[i+3]
+                current_study["compensation"] = clean_lines[i+4]
+                current_study["location"] = clean_lines[i+5]
+                # Default empty dates for this format since it's "Enrolling" now
+                current_study["start_date"] = "ASAP"
+                current_study["end_date"] = "TBD"
+                
+                # Scan next few lines for Age
+                age_range = "TBD"
+                for j in range(i+6, min(i+12, len(clean_lines))):
+                    if "Age" in clean_lines[j]:
+                        age_range = clean_lines[j]
+                        break
+                current_study["age_range"] = age_range
+                
+                studies.append(current_study)
+                i += 5  # Jump ahead a bit, the loop will continue scanning
+                continue
             except IndexError:
                 break
         
