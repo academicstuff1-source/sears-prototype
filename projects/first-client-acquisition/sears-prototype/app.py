@@ -9,7 +9,7 @@ def parse_web_alert_text_ai(raw_text, api_key):
     """Uses Gemini API to extract unstructured text into a bulletproof structured JSON."""
     client = genai.Client(api_key=api_key)
     # Using the fast & cheap model
-    model = 'gemini-2.5-flash'
+    model = 'gemini-3.8-flash'
     
     prompt = f"""
     You are a data extraction assistant. Extract all clinical trial postings from the following text.
