@@ -94,7 +94,7 @@ OWNER: Michael
 
 ***
 
-[2026-09-14] DECISION: Reframed A. Cheray Scott (CS InsureWise) from standard AI consulting prospect to a consulting-led play — build the call triage system/playbook, not fill the human receptionist role.
+[2026-09-14] DECISION: Reframed A. Cheray Scott (CS InsureWise) from standard AI consulting prospect to a consulting-led play â€” build the call triage system/playbook, not fill the human receptionist role.
 REASONING: Cold call conversation revealed she is deeply AI-averse (confirmed twice on the call) and has built her entire business on a white-gloves, human concierge model for Medicare-age senior clients. She has a real, confirmed pain: call overflow and no one to triage repetitive client questions during open enrollment. She pivoted the conversation toward hiring Michael as a part-time human call screener. Declined that framing in the moment; instead positioning as the consultant who *builds the triage system* so that whoever she hires (human) can operate it effectively. This preserves the consulting engagement model. Follow-up text sent with reframe.
 CONTEXT: Call #3 from warm church/neighbor list. Two-attempt call (she hung up on call 1 thinking Michael was AI). Reached full conversation on call 2. She asked Michael to text his info for a callback. Key intelligence: she pays her current VA ~\$25/hr for CRM/newsletters; is approaching 60 and wants more work-life balance; open enrollment is her crunch period; her client base is loyalty-driven seniors who screen all calls.
 OWNER: Michael
@@ -124,13 +124,13 @@ OWNER: Michael
 
 [2026-09-18] DECISION: Advanced Melanie Powell (Little Flower Birth Services) to proposal stage.
 REASONING: Diagnostic call confirmed two concrete, unautomated pain points: (1) post-discovery "think about it" follow-up sequence is fully manual despite prior attempts with an IT guide; (2) lead magnet funnel emails exist but the end-to-end pipeline lacks automation. She confirmed both would be a no-brainer to solve. Requested a formal proposal.
-CONTEXT: 12-minute Google Meet diagnostic call (Sept 18, 10 AM). Proposed automation: Day 1 value add → Day 3 soft SMS check-in → Day 7 objection handling → hot lead ping to Melanie when ready. Follow-up proposal review meeting booked for Wednesday, Sept 23 at 10 AM. Email: melanie.powell@littleflowerbirthservices.com.
+CONTEXT: 12-minute Google Meet diagnostic call (Sept 18, 10 AM). Proposed automation: Day 1 value add â†’ Day 3 soft SMS check-in â†’ Day 7 objection handling â†’ hot lead ping to Melanie when ready. Follow-up proposal review meeting booked for Wednesday, Sept 23 at 10 AM. Email: melanie.powell@littleflowerbirthservices.com.
 OWNER: Michael
 
 ***
 
 [2026-09-21] DECISION: Capped the Christopher Sears project at Phase 3 (Intake script, pipeline, participant website). Categorizing the work strictly as a portfolio case study, not a path to a paying engagement.
-REASONING: Sears is a frequent trial participant himself and floated an LLC partnership in lieu of payment�classic signals of an unfunded prospect. Furthermore, the B2B model (Phases 4-6) requires a formal legal entity, IRB/healthcare attorneys, BAA compliance, and real research site relationships to execute safely. A solo consultant cannot vibe-code a compliant B2B clinical trial recruitment network.
+REASONING: Sears is a frequent trial participant himself and floated an LLC partnership in lieu of payment—classic signals of an unfunded prospect. Furthermore, the B2B model (Phases 4-6) requires a formal legal entity, IRB/healthcare attorneys, BAA compliance, and real research site relationships to execute safely. A solo consultant cannot vibe-code a compliant B2B clinical trial recruitment network.
 CONTEXT: Capping at Phase 3 allows Michael to walk away with a highly tangible, impressive automation case study ('Built an automated clinical trial opportunity intake and distribution pipeline') without taking on legal risk or wasting time chasing a prospect with no budget.
 OWNER: Michael
 
@@ -182,9 +182,9 @@ OWNER: Michael
 
 ***
 
-[2026-10-01] DECISION: Reverted Sears parsing engine from Gemini LLM API back to a resilient local Regex parser for Phase 1 demo.
-REASONING: Google's Gemini AI API threw a 503 capacity error during testing. Relying on an external API that is experiencing load issues introduces unacceptable risk for a live client demo.
-CONTEXT: Built an AI parsing engine, pushed to Streamlit Cloud, observed the 503 failure, and rolled back to a hybrid Regex approach to guarantee demo stability.
+[2026-10-01] DECISION: The AI-driven parsing engine (LLM) is the primary production solution for the Sears Prototype. The Regex parser is strictly a fallback mechanism.
+REASONING: The AI engine reads dynamically like a human, which is mandatory for production use where the scraped text format changes unpredictably. The temporary pivot to Regex on Oct 1 was strictly to bypass a live API outage (503 error) during a demo window. 
+CONTEXT: Michael clarified that the tool must be built for real-world client use, not just a controlled demo. We will build both: the AI engine runs point, and the Regex engine serves as an offline failsafe.
 OWNER: Michael
 
 ***
