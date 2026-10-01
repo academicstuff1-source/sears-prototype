@@ -1,15 +1,15 @@
 import streamlit as st
 import json
 import re
-import google.generativeai as genai
+from google import genai
 
 # --- AI Core Logic ---
 
 def parse_web_alert_text_ai(raw_text, api_key):
     """Uses Gemini API to extract unstructured text into a bulletproof structured JSON."""
-    genai.configure(api_key=api_key)
+    client = genai.Client(api_key=api_key)
     # Using the fast & cheap model
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = 'gemini-2.5-flash'
     
     prompt = f"""
     You are a data extraction assistant. Extract all clinical trial postings from the following text.
@@ -30,7 +30,7 @@ def parse_web_alert_text_ai(raw_text, api_key):
     {raw_text}
     """
     
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model=model, contents=prompt)
     text = response.text.strip()
     
     # Clean up potential markdown formatting from the LLM
