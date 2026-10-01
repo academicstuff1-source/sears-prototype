@@ -1,73 +1,48 @@
 import streamlit as st
-import re
 import json
+import re
+import google.generativeai as genai
 
-# --- Core Logic from pipeline.py ---
+# --- AI Core Logic ---
 
-def parse_web_alert_text(raw_text):
-    """Parses the raw unstructured text from the Web Alert app into structured data."""
-    lines = [line.strip() for line in raw_text.split('\n')]
-    clean_lines = [line for line in lines if line and not '[?]' in line]
+def parse_web_alert_text_ai(raw_text, api_key):
+    """Uses Gemini API to extract unstructured text into a bulletproof structured JSON."""
+    genai.configure(api_key=api_key)
+    # Using the fast & cheap model
+    model = genai.GenerativeModel('gemini-1.5-flash')
     
-    studies = []
+    prompt = f"""
+    You are a data extraction assistant. Extract all clinical trial postings from the following text.
+    Return a JSON list of objects. Each object MUST have exactly these keys (use "N/A" if missing):
+    - "posting_id" (e.g. 0009-0895, CA48121-1, or N/A)
+    - "timeline" (e.g. "Enrolling", "Starts in 12 Days", or N/A)
+    - "project_name" (The study name or description, e.g. "Clinical Research Study...", "Backyard")
+    - "compensation" (The dollar amount, e.g. "$7500", "Up to $7500", "$3,750", or N/A)
+    - "location" (City/State or clinic name, e.g. "Salt Lake City, UT", "Lincoln")
+    - "start_date" (If available, e.g. "Oct 05", otherwise "ASAP")
+    - "end_date" (If available, e.g. "Oct 14", otherwise "TBD")
+    - "demographics" (e.g. "Healthy Volunteers", "Male & Females")
+    - "age_range" (e.g. "Age 18 - 55", "19 to 55 years of age", or N/A)
+
+    Return ONLY a valid JSON list of objects. Do not include markdown formatting blocks like ```json.
     
-    i = 0
-    while i < len(clean_lines):
-        line = clean_lines[i]
+    Text to parse:
+    {raw_text}
+    """
+    
+    response = model.generate_content(prompt)
+    text = response.text.strip()
+    
+    # Clean up potential markdown formatting from the LLM
+    if text.startswith("```json"):
+        text = text[7:-3]
+    elif text.startswith("```"):
+        text = text[3:-3]
         
-        # Format 1: Triggered by "Starts in X Days"
-        if i + 1 < len(clean_lines) and re.match(r'Starts in \d+ Days', clean_lines[i+1], re.IGNORECASE):
-            current_study = {
-                "project_name": line,
-                "timeline": clean_lines[i+1]
-            }
-            try:
-                current_study["posting_id"] = clean_lines[i+2]
-                current_study["location"] = clean_lines[i+3]
-                current_study["start_date"] = clean_lines[i+4]
-                current_study["end_date"] = clean_lines[i+5]
-                current_study["demographics"] = clean_lines[i+6]
-                comp_raw = clean_lines[i+7]
-                current_study["compensation"] = comp_raw.replace('*', '')
-                current_study["age_range"] = clean_lines[i+8]
-                studies.append(current_study)
-                i += 9
-                continue
-            except IndexError:
-                break
-                
-        # Format 2: Triggered by "Enrolling" immediately after an ID
-        elif i + 1 < len(clean_lines) and clean_lines[i+1].lower() == 'enrolling':
-            current_study = {
-                "posting_id": line,
-                "timeline": clean_lines[i+1]
-            }
-            try:
-                current_study["demographics"] = clean_lines[i+2]
-                current_study["project_name"] = clean_lines[i+3]
-                current_study["compensation"] = clean_lines[i+4]
-                current_study["location"] = clean_lines[i+5]
-                # Default empty dates for this format since it's "Enrolling" now
-                current_study["start_date"] = "ASAP"
-                current_study["end_date"] = "TBD"
-                
-                # Scan next few lines for Age
-                age_range = "TBD"
-                for j in range(i+6, min(i+12, len(clean_lines))):
-                    if "Age" in clean_lines[j]:
-                        age_range = clean_lines[j]
-                        break
-                current_study["age_range"] = age_range
-                
-                studies.append(current_study)
-                i += 5  # Jump ahead a bit, the loop will continue scanning
-                continue
-            except IndexError:
-                break
-        
-        i += 1
-        
-    return studies
+    return json.loads(text.strip())
+
+
+# --- Output Generators ---
 
 def generate_approval_email(study):
     return f"""Subject: Request to share approved research-study recruitment materials (Ref: {study.get('posting_id', 'N/A')})
@@ -117,41 +92,52 @@ def generate_website_html(study):
 
 # --- Streamlit UI ---
 
-st.set_page_config(page_title="Phase One Plug - Intake Parser", layout="wide")
+st.set_page_config(page_title="Phase One Plug - AI Intake Parser", layout="wide")
 
-st.title("Phase One Plug: Data Formatting Engine")
-st.markdown("Paste your raw output from the **Web Alert App** below. This tool will instantly clean the formatting, extract the data, and generate your Telegram posts and compliance emails.")
+st.sidebar.title("AI Configuration")
+api_key = st.sidebar.text_input("Gemini API Key", type="password", help="Required for bulletproof AI parsing.")
+if not api_key:
+    st.sidebar.warning("Please enter your API Key to enable AI Parsing. You can get one for free at aistudio.google.com")
+
+st.title("Phase One Plug: AI Data Engine")
+st.markdown("Paste your raw output from the **Web Alert App** below. The AI will instantly clean the formatting, extract the data regardless of the structure, and generate your Telegram posts and compliance emails.")
 
 raw_input = st.text_area("Raw Web Alert Text", height=200, placeholder="Paste data here...")
 
-if st.button("Process Data", type="primary"):
+if st.button("Process Data with AI", type="primary"):
     if not raw_input.strip():
         st.warning("Please paste some text first.")
+    elif not api_key:
+        st.error("AI Parsing requires a Gemini API Key. Please enter it in the sidebar.")
     else:
-        studies = parse_web_alert_text(raw_input)
-        
-        if not studies:
-            st.error("No valid study formats found. Please make sure the text contains the 'Starts in X Days' anchor.")
-        else:
-            st.success(f"Successfully extracted {len(studies)} studies!")
-            
-            for idx, study in enumerate(studies, 1):
-                st.subheader(f"Study #{idx}: {study.get('project_name', 'Unknown')}")
+        with st.spinner("AI is analyzing and structuring the text..."):
+            try:
+                studies = parse_web_alert_text_ai(raw_input, api_key)
                 
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    st.markdown("**Telegram Ready Post**")
-                    st.code(generate_telegram_message(study), language="text")
+                if not studies:
+                    st.error("The AI could not find any valid studies in the text provided.")
+                else:
+                    st.success(f"Successfully extracted {len(studies)} studies using AI!")
                     
-                    st.markdown("**Website HTML Payload**")
-                    st.code(generate_website_html(study), language="html")
-                
-                with col2:
-                    st.markdown("**Compliance Approval Request (Email Draft)**")
-                    st.code(generate_approval_email(study), language="text")
-                    
-                    with st.expander("View Raw JSON Data"):
-                        st.json(study)
-                
-                st.divider()
+                    for idx, study in enumerate(studies, 1):
+                        st.subheader(f"Study #{idx}: {study.get('project_name', 'Unknown')}")
+                        
+                        col1, col2 = st.columns(2)
+                        
+                        with col1:
+                            st.markdown("**Telegram Ready Post**")
+                            st.code(generate_telegram_message(study), language="text")
+                            
+                            st.markdown("**Website HTML Payload**")
+                            st.code(generate_website_html(study), language="html")
+                        
+                        with col2:
+                            st.markdown("**Compliance Approval Request (Email Draft)**")
+                            st.code(generate_approval_email(study), language="text")
+                            
+                            with st.expander("View Raw AI JSON Data"):
+                                st.json(study)
+                        
+                        st.divider()
+            except Exception as e:
+                st.error(f"An error occurred during AI parsing: {e}")
