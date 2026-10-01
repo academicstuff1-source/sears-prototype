@@ -94,10 +94,16 @@ def generate_website_html(study):
 
 st.set_page_config(page_title="Phase One Plug - AI Intake Parser", layout="wide")
 
-st.sidebar.title("AI Configuration")
-api_key = st.sidebar.text_input("Gemini API Key", type="password", help="Required for bulletproof AI parsing.")
+# Securely grab the API key from Streamlit secrets so it isn't exposed on GitHub
+try:
+    api_key = st.secrets["GEMINI_API_KEY"]
+except (KeyError, FileNotFoundError):
+    api_key = None
+
 if not api_key:
-    st.sidebar.warning("Please enter your API Key to enable AI Parsing. You can get one for free at aistudio.google.com")
+    st.sidebar.title("AI Configuration")
+    api_key = st.sidebar.text_input("Gemini API Key", type="password", help="Required for bulletproof AI parsing.")
+    st.sidebar.warning("Please enter your API Key, or configure st.secrets in the Streamlit Cloud dashboard.")
 
 st.title("Phase One Plug: AI Data Engine")
 st.markdown("Paste your raw output from the **Web Alert App** below. The AI will instantly clean the formatting, extract the data regardless of the structure, and generate your Telegram posts and compliance emails.")
@@ -108,7 +114,7 @@ if st.button("Process Data with AI", type="primary"):
     if not raw_input.strip():
         st.warning("Please paste some text first.")
     elif not api_key:
-        st.error("AI Parsing requires a Gemini API Key. Please enter it in the sidebar.")
+        st.error("AI Parsing requires a Gemini API Key. Please add it to your Streamlit Secrets.")
     else:
         with st.spinner("AI is analyzing and structuring the text..."):
             try:
