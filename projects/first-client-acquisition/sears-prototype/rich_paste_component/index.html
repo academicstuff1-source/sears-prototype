@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      #editor {
+        border: 2px dashed #4CAF50;
+        border-radius: 8px;
+        padding: 15px;
+        min-height: 150px;
+        background: #fdfdfd;
+        overflow-y: auto;
+        color: #333;
+        font-size: 14px;
+        cursor: text;
+        transition: border-color 0.2s, background 0.2s;
+      }
+      #editor:focus {
+        border-color: #2196F3;
+        background: #ffffff;
+        outline: none;
+      }
+      #editor:empty:before {
+        content: attr(placeholder);
+        color: #888;
+      }
+      #status {
+        margin-top: 6px;
+        font-size: 13px;
+        color: #2e7d32;
+        font-weight: 600;
+        min-height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="editor" contenteditable="true" placeholder="Click here and press Ctrl+V to add a Web Alert page to your batch (paste as many pages as you want, one after another)..."></div>
+    <div id="status"></div>
+    
+    <script>
+      // Pure JavaScript Streamlit Bridge (No external CDNs needed)
+      function sendMessageToStreamlitClient(type, data) {
+        var outData = Object.assign({
+          isStreamlitMessage: true,
+          type: type,
+        }, data);
+        window.parent.postMessage(outData, "*");
+      }
+
+      function init() {
+        sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
+      }
+
+      function setFrameHeight(height) {
+        sendMessageToStreamlitClient("streamlit:setFrameHeight", {height: height});
+      }
+
+      function sendDataToPython(data) {
+        sendMessageToStreamlitClient("streamlit:setComponentValue", {value: data});
+      }
+
+      window.onload = function() {
+        init();
+        setFrameHeight(215);
+      };
+
+      const editor = document.getElementById('editor');
+      const statusEl = document.getElementById('status');
+      let pasteCount = 0;
+
+      editor.addEventListener('paste', function(event) {
+        // Prevent default paste so the box stays clean for the next paste
+        event.preventDefault();
+        
+        let htmlPaste = (event.clipboardData || window.clipboardData).getData("text/html");
+        let plainPaste = (event.clipboardData || window.clipboardData).getData("text/plain");
+        let content = htmlPaste || plainPaste;
+        if (!content) return;
+
+        pasteCount += 1;
+        editor.innerHTML = "";
+        statusEl.innerHTML = "✓ Paste #" + pasteCount + " added to batch! You can paste another page right here (Ctrl+V) or click Process Batch below.";
+        
+        // Send data back to Streamlit with unique timestamp so repeated pastes always register
+        sendDataToPython({
+          content: content,
+          timestamp: Date.now()
+        });
+      });
+      
+      // Update height dynamically
+      editor.addEventListener('input', function() {
+        editor.innerHTML = "";
+      });
+    </script>
+  </body>
+</html>
